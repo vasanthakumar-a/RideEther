@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ride Ether Map</title>
+    <link rel="icon" href="{% static 'images/RideEther.png' %}" type="image/x-image" />
+    <link rel="stylesheet" href="{% static 'css/map.css' %}" type="text/css">
+</head>
+<body>
+    
+    <!-- <div class="loader_bg">
+        <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+    </div> -->
+    <div class="nav-bar">
+        <div class="row">
+            <div class="left-logo">
+                <div class="logo"> <a href="index.html"><img src="{% static 'images/RideEtherLogo.png' %}" alt="#"></a> </div>
+            </div>
+            <div class="login">
+                <nav>
+                    <ul class="nav-login">
+                        <li><a href="#"><img src="{% static 'images/user.png' %}" class="user-img"></a></li>
+                        <li><a href="register">SignUp</a></li>
+                        <li class="active"><a href="login">Login</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="Heading">
+        <h1>Ride Ether</h1>
+    </div>  -->
+    <div class="main">
+        <div class="row">
+            <div class="from">
+                <div class="col-6">
+                    <h3>From Location :</h3>
+                    <input type="text" placeholder="From" />
+                </div>
+            </div>
+            <div class="to">
+                <div class="col-6">
+                    <h3>To Location :</h3>
+                    <input type="text" placeholder="To" />
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="map">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d250646.9682722278!2d76.82714657171041!3d11.011677490299467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba859af2f971cb5%3A0x2fc1c81e183ed282!2sCoimbatore%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1625373861281!5m2!1sen!2sin"
+                    width="688" height="466" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+        <div class="submit">
+            <div class="button_section"> <a class="main_bt" href="process">Ride</a></div>
+        </div>
+    </div>
+
+    </body>
+
+</html>

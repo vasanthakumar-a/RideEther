@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <link rel="icon" href="{% static 'images/loginLogo.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" type="text/css">
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+    <div class="main_box">
+        <img src="{% static 'images/avatar.png' %}" class="logo">
+        <h1>Login</h1>
+        <form>
+            <p>Phone Number</p>
+            <input type="text" placeholder="Enter Phone Number">
+            <p>Password</p>
+            <input type="password" placeholder="Enter Password">
+            <input type="submit" class="login_btn" value="Login">
+        </form>
+    </div>
+</body>
+</html>
