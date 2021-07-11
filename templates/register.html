@@ -12,13 +12,16 @@
     <div class="main_box">
         <img src="{% static 'images/avatar.png' %}" class="logo">
         <h1>Register</h1>
-        <form>
+        <form action="register" method="POST">
+            {% csrf_token %}
             <p>First Name</p>
             <input type="text" placeholder="Enter First Name">
             <p>Last Name</p>
             <input type="text" placeholder="Enter Last Name">
             <p>Email id</p>
             <input type="text" placeholder="Enter Email id">
+            <p>Username</p>
+            <input type="text" placeholder="Enter Username">
             <p>Phone Number</p>
             <input type="text" placeholder="Enter Phone Number">
             <p>Password</p>
