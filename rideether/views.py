@@ -15,9 +15,9 @@ def register(request):
         phone_number = request.POST['phone_number']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
-
-        user = User.objects.create_user(username=username, password=password1, email=email, first_name=first_name, last_name=last_name, phone_number=phone_number)
-        user.save()
+        if password1==password2:
+            user = User.objects.create_user(username=username, password=password1, email=email, first_name=first_name, last_name=last_name, phone_number=phone_number)
+            user.save()
         print("user created")
         return redirect('/')
 
