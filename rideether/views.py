@@ -1,3 +1,4 @@
+from typing import Container
 from django.shortcuts import redirect, render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
@@ -54,14 +55,11 @@ def login(request):
     if request.method == 'POST':
         phone_number = request.POST['phone_number']
         password = request.POST['password']
+        tx_hash = contract.functions.login(phone_number,password).transact()
+        web3.eth.waitForTransactionReceipt(tx_hash)
+        print(web3.utils.hexToNumberString(tx_hash))
 
-        user = auth.authenticate(phone_number=phone_number,password=password)
-
-        if user is not None:
-            auth.login(request, user)
-            return redirect('process')
-        else:
-            return redirect('register')
+        return redirect('register')
     else:
         return render(request, 'login.html')
 
