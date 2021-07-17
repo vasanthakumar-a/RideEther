@@ -1095,11 +1095,11 @@ ul.top_icon li a {
      position: relative;
      border-bottom: solid #eee 1px;
 }
-.main-menu ul>li .sub-down li a::before{}
+
 .main-menu ul>li .sub-down li a:over {
      color: #111111;
 }
-.main-menu ul>li .sub-down li a:hover::before{}
+
 .main-menu ul li:first-child {
      margin-left: 0;
 }
@@ -1169,7 +1169,7 @@ ul.top_icon li a {
      right: 0;
      padding: 15px 0px;
 }
-.sub-full {}
+
 .simple-down {
      padding: 15px;
 }

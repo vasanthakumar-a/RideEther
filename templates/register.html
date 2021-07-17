@@ -15,22 +15,25 @@
         <form action="register" method="POST">
             {% csrf_token %}
             <p>First Name</p>
-            <input type="text" placeholder="Enter First Name">
+            <input type="text" name="first_name" placeholder="Enter First Name" />
             <p>Last Name</p>
-            <input type="text" placeholder="Enter Last Name">
+            <input type="text" name="last_name" placeholder="Enter Last Name" />
             <p>Email id</p>
-            <input type="text" placeholder="Enter Email id">
+            <input type="text" name="email" placeholder="Enter Email id" />
             <p>Username</p>
-            <input type="text" placeholder="Enter Username">
+            <input type="text" name="username" placeholder="Enter Username" />
             <p>Phone Number</p>
-            <input type="text" placeholder="Enter Phone Number">
+            <input type="text" name="phone_number" placeholder="Enter Phone Number" />
             <p>Password</p>
-            <input type="password" placeholder="Enter Password">
+            <input type="password" name="password1" placeholder="Enter Password /">
             <p>Confirm Password</p>
-            <input type="password" placeholder="Enter Confirm Password">
+            <input type="password" name="password2" placeholder="Enter Confirm Password" />
             <br><br>
             <input type="submit" class="login_btn" value="Register">
         </form>
     </div>
+    {% for message in messages %}
+        <h3>{{message}}   </h3> 
+    {%endfor%}
 </body>
 </html>

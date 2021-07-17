@@ -12,13 +12,17 @@
     <div class="main_box">
         <img src="{% static 'images/avatar.png' %}" class="logo">
         <h1>Login</h1>
-        <form>
+        <form action="login" method="POST">
+            {% csrf_token %}
             <p>Phone Number</p>
-            <input type="text" placeholder="Enter Phone Number">
+            <input type="text" name="phone_number" placeholder="Enter Phone Number">
             <p>Password</p>
-            <input type="password" placeholder="Enter Password">
+            <input type="password" name="password" placeholder="Enter Password">
             <input type="submit" class="login_btn" value="Login">
         </form>
     </div>
+    {% for message in messages %}
+        <h3>{{message}}   </h3> 
+    {%endfor%}
 </body>
 </html>
