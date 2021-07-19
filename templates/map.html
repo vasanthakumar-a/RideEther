@@ -48,9 +48,9 @@
                               <ul class="menu-area-main">
                                  <li class="active"> <a href="#">Home</a> </li>
 
-                                 {% if details.length != 0 %}
+                                 {% if details %}
                                  <li><a>Hello, {{name}}</a></li>
-                                 <li><a href="login">logout</a></li>
+                                 <li><a href="logout">logout</a></li>
                                  {% else %}
                                  <li><a href="login">login</a></li>
                                  <li><a href="register">Sign Up</a></li>
