@@ -43,9 +43,14 @@
                            <nav class="main-menu">
                               <ul class="menu-area-main">
                                  <li class="active"> <a href="#">Home</a> </li>
+                                 
+                                 {% if flag == 1 %}
+                                 <li><a>Hello, {{name}}</a></li>
+                                 <li><a href="logout">logout</a></li>
+                                 {% else %}
                                  <li><a href="login">login</a></li>
                                  <li><a href="register">Sign Up</a></li>
-                                 <!-- <li><a href="#"><img src="{% static 'images/user.png' %}" class="user-img"></a></li> -->
+                                 {% endif %}
                               </ul>
                            </nav>
                         </div>

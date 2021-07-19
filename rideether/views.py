@@ -71,7 +71,11 @@ def logout(request):
     #return render(request,'map.html')
 
 def process(request):
-    return render(request, 'process.html')
+    print(details)
+    if details:
+        return render(request, 'process.html',{'name':details[0],'flag':1})
+    else:
+        return render(request, 'process.html',{'flag':0})
 
 def map(request):
     print(details)
