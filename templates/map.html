@@ -47,9 +47,14 @@
                            <nav class="main-menu">
                               <ul class="menu-area-main">
                                  <li class="active"> <a href="#">Home</a> </li>
+
+                                 {% if details.length != 0 %}
+                                 <li><a>Hello, {{name}}</a></li>
+                                 <li><a href="login">logout</a></li>
+                                 {% else %}
                                  <li><a href="login">login</a></li>
                                  <li><a href="register">Sign Up</a></li>
-                                 <li><a href="#"><img src="{% static 'images/user.png' %}" class="user-img"></a></li>
+                                 {% endif %}
                               </ul>
                            </nav>
                         </div>
@@ -83,7 +88,7 @@
                               </div>
                            </div>
                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
-                              <a href="process">Proceed</a>
+                              <a href="login">Proceed</a>
                            </div>
                         </div>
                      </form>
@@ -106,7 +111,7 @@
                   </div>
                </div>
             </div>
-            <a href="process">Proceed</a>
+            <a href="login">Proceed</a>
          </div>
       </div>
    
