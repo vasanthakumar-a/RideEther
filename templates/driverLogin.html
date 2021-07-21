@@ -12,7 +12,7 @@
     <div class="main_box">
         <img src="{% static 'images/avatar.png' %}" class="logo">
         <h1>Login</h1>
-        <form action="login" method="POST">
+        <form action="driverLogin" method="POST">
             {% csrf_token %}
             <p>Phone Number</p>
             <input type="text" name="phone_number" placeholder="Enter Phone Number">

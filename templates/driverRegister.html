@@ -12,14 +12,14 @@
     <div class="main_box">
         <img src="{% static 'images/avatar.png' %}" class="logo">
         <h1>Register</h1>
-        <form action="register" method="POST">
+        <form action="driverRegister" method="POST">
             {% csrf_token %}
-            <p>First Name</p>
-            <input type="text" name="first_name" placeholder="Enter First Name" />
-            <p>Last Name</p>
-            <input type="text" name="last_name" placeholder="Enter Last Name" />
-            <p>Email id</p>
-            <input type="text" name="email" placeholder="Enter Email id" />
+            <p>Driver Name</p>
+            <input type="text" name="driver_name" placeholder="Enter Driver Name" />
+            <p>Vehical Name</p>
+            <input type="text" name="vehical_name" placeholder="Enter Vehical Name" />
+            <p>Vehical Number</p>
+            <input type="text" name="vehical_number" placeholder="Enter Vehical Number" />
             <p>Username</p>
             <input type="text" name="username" placeholder="Enter Username" />
             <p>Phone Number</p>
