@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>RideEther travels</title>
+      <title>RideEther Driver travels</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -33,12 +33,11 @@
    </head>
    <!-- body -->
    <body class="main-layout">
-      <!-- loader  -->
+
       <!-- <div class="loader_bg">
          <div class="loader"><img src="{% static 'images/loading.gif'%}" alt="#" /></div>
       </div> -->
-      <!-- end loader -->
-      <!-- header -->
+
       <header>
          <!-- header inner -->
          <div class="header">
@@ -57,10 +56,15 @@
                            <nav class="main-menu">
                               <ul class="menu-area-main">
                                  <li class="active"> <a href="{% static '#' %}">Home</a> </li>
-                                 <li> <a href="rideether/driverIndex">For Driver</a> </li>
-                                 <li> <a href="#about">About</a> </li>
-                                 <li><a href="#travel">Coming Soon</a></li>
-                                 <li><a href="#contact">Contact Us</a></li>
+                                 
+                                 {% if flag == 1 %}
+                                 <li><a>Hello, {{name}}</a></li>
+                                 <li><a href="logout">logout</a></li>
+                                 {% else %}
+                                 <li><a href="login">login</a></li>
+                                 <li><a href="register">Sign Up</a></li>
+                                 {% endif %}
+                                 
                               </ul>
                      
                            </nav>
@@ -78,54 +82,12 @@
             <img src="{% static 'images/banner.jpg' %}" alt="#" type="image/x-image"/>
             <div class="container">
                <div class="text-bg">
-                  <h1>Join<br><strong class="white">Ride Ether</strong></h1>
+                  <h1>Take<br><strong class="white"> Ride in Ether</strong></h1>
                   <div class="button_section"> <a class="main_bt" href="rideether/map">Ride</a></div>
                </div>
             </div>
          </div>
       </section>
-      <!-- about -->
-      <div id="about" class="about">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12 ">
-                  <div class="titlepage">
-                     <h2>About  our travel agency</h2>
-                     <span> fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,</span>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="bg">
-            <div class="container">
-               <div class="row">
-                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                     <div class="about-box">
-                        <p> <span>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure thereThere are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there</span></p>
-                        
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <a href="#">Read More</a>
-         </div>
-      </div>
-      <!-- end about -->
-      <!-- traveling -->
-      <div id="travel" class="amazing">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="amazing-box">
-                     <h2>Advance Booking Feature</h2>
-                     <span>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there</span>
-                     <a href="{% static '#travel' %}">Coming Soon</a>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- end Amazing -->
       <!-- footer -->
       <footer>
          <div id="contact" class="footer">

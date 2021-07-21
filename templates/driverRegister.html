@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Driver Register</title>
+    <meta charset="UTF-8">
+    <link rel="icon" href="{% static 'images/loginLogo.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" type="text/css">
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+    <div class="main_box">
+        <img src="{% static 'images/avatar.png' %}" class="logo">
+        <h1>Register</h1>
+        <form action="register" method="POST">
+            {% csrf_token %}
+            <p>First Name</p>
+            <input type="text" name="first_name" placeholder="Enter First Name" />
+            <p>Last Name</p>
+            <input type="text" name="last_name" placeholder="Enter Last Name" />
+            <p>Email id</p>
+            <input type="text" name="email" placeholder="Enter Email id" />
+            <p>Username</p>
+            <input type="text" name="username" placeholder="Enter Username" />
+            <p>Phone Number</p>
+            <input type="text" name="phone_number" placeholder="Enter Phone Number" />
+            <p>Password</p>
+            <input type="password" name="password1" placeholder="Enter Password" />
+            <p>Confirm Password</p>
+            <input type="password" name="password2" placeholder="Enter Confirm Password" />
+            <br><br>
+            <input type="submit" class="login_btn" value="Register">
+        </form>
+        <p><a href="driverLogin">Login Here</a></p>
+    </div>
+    {% for message in messages %}
+        <h3>{{message}}   </h3> 
+    {%endfor%}
+</body>
+</html>

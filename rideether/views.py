@@ -11,11 +11,12 @@ ganache_url = "http://127.0.0.1:7545"
 web3 = Web3(Web3.HTTPProvider(ganache_url))
 web3.eth.default_account = web3.eth.accounts[0]
 abi = json.loads('[{"constant":false,"inputs":[{"name":"_first_name","type":"string"},{"name":"_last_name","type":"string"},{"name":"_email","type":"string"},{"name":"_username","type":"string"},{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"register","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"nbOfUsers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"login","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getUserAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]')
-address = web3.toChecksumAddress("0x958bFa5eCeBA38bDe2E8dAD147b95199e7Bd772b")
+address = web3.toChecksumAddress("0xF4edE9Db5D05419F06dC11D9d18a263f6D739E80")
 
 contract = web3.eth.contract(address=address, abi=abi)
 
 details = []
+checkout = []
 
 def register(request):
 
@@ -44,9 +45,9 @@ def register(request):
                 return redirect('login')
         else:
             messages.info(request,'Password Not Matching')
-            return redirect('register')
+            return redirect('userRegister')
     else:
-        return render(request, "register.html")
+        return render(request, "userRegister.html")
 
 def login(request):
     global details
@@ -59,23 +60,25 @@ def login(request):
             return redirect('process')
         else:
             messages.info(request,'Phone Number or Password Not Matching')
-            return render(request, 'login.html')
+            return render(request, 'userLogin.html')
     else:
-        return render(request, 'login.html')
+        return render(request, 'userLogin.html')
 
 def logout(request):
     global details
     details = []
     print(details)
     return redirect('map')
-    #return render(request,'map.html')
 
 def process(request):
+    
+    checkout = ['Driver','44299','60','BMW','TN37AB1234','117.00','A Location','B Location']
+
     print(details)
     if details:
-        return render(request, 'process.html',{'name':details[0],'flag':1})
+        return render(request, 'process.html',{'name':details[0],'flag':1,'checkout':checkout})
     else:
-        return render(request, 'process.html',{'flag':0})
+        return render(request, 'process.html',{'flag':0,'checkout':checkout})
 
 def map(request):
     print(details)
@@ -83,3 +86,15 @@ def map(request):
         return render(request, 'map.html',{'name':details[0],'flag':1})
     else:
         return render(request, 'map.html',{'flag':0})
+
+def driverLogin(request):
+    return render(request, 'driverLogin.html')
+
+def driverRegister(request):
+    return render(request, 'driverRegister.html')
+
+def driverIndex(request):
+    if details:
+        return render(request, 'driverIndex.html',{'name':details[0],'flag':1,'checkout':checkout})
+    else:
+        return render(request, 'driverIndex.html',{'flag':0,'checkout':checkout})
