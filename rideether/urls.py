@@ -11,4 +11,6 @@ urlpatterns=[
     path('driverLogin', views.driverLogin, name='driverLogin'),
     path('driverRegister', views.driverRegister, name='driverRegister'),
     path('driverIndex', views.driverIndex, name='driverIndex'),
+    path('start', views.start, name='start'),
+    path('stop', views.stop, name='stop'),
 ]

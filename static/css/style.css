@@ -497,6 +497,7 @@ ul.top_icon li a {
      color: #ff1616;
 }
 
+
 .right_cart_section {
      float: right;
      width: auto;
@@ -1708,8 +1709,8 @@ input[type="radio"] .styled:checked+label::after {
      margin: 57px 0px 0px 25px;
 }
 .main-form a:hover {
-     background: #15cfe5;
-     border: solid #15cfe5 1px;
+     background: #757575;
+     border: solid #757575 1px;
 }
 .about {
      margin-top: 30px;
@@ -1807,7 +1808,7 @@ input[type="radio"] .styled:checked+label::after {
      justify-content: center;
 }
 .about a:hover {
-     background: #15cfe5;
+     background: #757575;
      ;
 }
 .traveling {
@@ -2279,15 +2280,35 @@ ul.location_icon span {
      padding: 20px 0px;
      background-color: #ee580f;
      color: #fff;
-     display: inline-block;
+     display: block;
      line-height: 20px;
      border-radius: 30px;
      text-align: center;
-     margin: 0 auto;
+     margin: 0 auto 0 200px;
      display: flex;
      justify-content: center;
+     float: left;
 }
 .available a:hover {
-     background: #15cfe5;
+     background: #757575;
      ;
+}
+
+.menu-area-main li.avail a {
+     background-color: #60e215;
+     border-radius: 100%;
+     padding: 20px;
+     color: #fff;
+}
+.menu-area-main li.busy a {
+     background-color: red;
+     border-radius: 100%;
+     padding: 20px;
+     color: #fff;
+}
+.menu-area-main li.notLogin a {
+     background-color: #757575;
+     border-radius: 100%;
+     padding: 20px;
+     color: #fff;
 }

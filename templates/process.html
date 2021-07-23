@@ -13,7 +13,7 @@
       <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
       <link rel="stylesheet" href="{% static 'css/style.css' %}">
       <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
-      <link rel="icon" href="{% static 'images/fevicon.png' %}" type="image/gif" />
+      <link rel="icon" href="{% static 'images/RideEtherLogo.png' %}" type="image/gif" />
       <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
       <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
       <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
@@ -42,7 +42,7 @@
                         <div class="limit-box">
                            <nav class="main-menu">
                               <ul class="menu-area-main">
-                                 <li class="active"> <a href="#">Home</a> </li>
+                                 <li class="active"> <a href="/">Home</a> </li>
                                  
                                  {% if flag == 1 %}
                                  <li><a>Hello, {{name}}</a></li>
@@ -75,11 +75,11 @@
                               <div class="row">
                                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <label >Driver Name</label>
-                                    <input class="form-control" placeholder="{{checkout.0}}" type="text" name="">
+                                    <input class="form-control" placeholder="{{driver.1}}" type="text" name="">
                                  </div>
                                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <label >Phone Number</label>
-                                    <input class="form-control" placeholder="{{checkout.1}}" type="text" name="">
+                                    <input class="form-control" placeholder="{{driver.4}}" type="text" name="">
                                  </div>
                                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <label >Duration</label>
@@ -87,11 +87,11 @@
                                  </div>
                                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <label >Vehical Name</label>
-                                    <input class="form-control" placeholder="{{checkout.3}}" type="text" name="Any">
+                                    <input class="form-control" placeholder="{{driver.2}}" type="text" name="Any">
                                  </div>
                                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <label >Vehical Nuber</label>
-                                    <input class="form-control" placeholder="{{checkout.4}}" type="text" name="Any">
+                                    <input class="form-control" placeholder="{{driver.3}}" type="text" name="Any">
                                  </div>
                                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <label >Price</label>

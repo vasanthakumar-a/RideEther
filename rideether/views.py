@@ -17,7 +17,19 @@ contract = web3.eth.contract(address=address, abi=abi)
 
 userDetails = []
 driverDetails = []
+driver = []
 checkout = []
+available = False
+
+def start(request):
+    global available
+    available = True
+    return redirect('driverIndex')
+
+def stop(request):
+    global available
+    available = False
+    return redirect('driverIndex')
 
 def register(request):
 
@@ -73,6 +85,8 @@ def logout(request):
 
 def driverLogout(request):
     global driverDetails
+    global available
+    available = False
     driverDetails = []
     print(driverDetails)
     return redirect('driverIndex')
@@ -83,7 +97,7 @@ def process(request):
 
     print(userDetails)
     if userDetails:
-        return render(request, 'process.html',{'name':userDetails[0],'flag':1,'checkout':checkout})
+        return render(request, 'process.html',{'name':userDetails[0],'flag':1,'driver':driver,'checkout':checkout})
     else:
         return render(request, 'map.html',{'flag':0,'checkout':checkout})
 
@@ -136,7 +150,12 @@ def driverRegister(request):
         return render(request, "driverRegister.html")
 
 def driverIndex(request):
-    if driverDetails:
-        return render(request, 'driverIndex.html',{'name':driverDetails[0],'flag':1})
+    if available:
+        global driver
+        driver = driverDetails
     else:
-        return render(request, 'driverIndex.html',{'flag':0})
+        driver = []
+    if driverDetails:
+        return render(request, 'driverIndex.html',{'name':driverDetails[0],'flag':1,'available':available})
+    else:
+        return render(request, 'driverIndex.html',{'flag':0,'available':available})

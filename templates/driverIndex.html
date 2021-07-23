@@ -55,7 +55,18 @@
                         <div class="limit-box">
                            <nav class="main-menu">
                               <ul class="menu-area-main">
-                                 <li class="active"> <a href="{% static '#' %}">Home</a> </li>
+
+                                 {% if flag == 1 %}
+                                 {% if available is True %}
+                                 <li class="avail"> <a href="driverIndex">Available</a></li>
+                                 {% else %}
+                                 <li class="busy"> <a href="driverIndex">Busy</a> </li>
+                                 {% endif %}
+                                 {% else %}
+                                 <li class="notLogin"> <a href="driverLogin">Not Login</a> </li>
+                                 {% endif %}
+
+                                 <li class="active"> <a href="driverIndex">Home</a> </li>
                                  
                                  {% if flag == 1 %}
                                  <li><a>Hello, {{name}}</a></li>
@@ -84,8 +95,8 @@
                <div class="text-bg">
                   <h1>Take<br><strong class="white"> Ride in Ether</strong></h1>
                   <div class="available">
-                     <a href="#">Available</a>
-                     <a href="#">Busy</a>
+                     <a href="start">Available</a>
+                     <a href="stop">Busy</a>
                   </div>
                </div>
             </div>
