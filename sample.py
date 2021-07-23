@@ -7,3 +7,5 @@ map_directions = folium.Map(location=[33.77,-84.37],zoom_start=5)
 folium.Geojson(route,name='route').add_to(map_directions)
 folium.LayerControl().add_to(map_directions)
 map_directions.save("map_directions.html")
+
+print("abcd")
