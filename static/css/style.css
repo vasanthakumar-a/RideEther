@@ -2272,4 +2272,22 @@ ul.location_icon span {
      margin-bottom: 20px;
 }
 
-/** slider arrow **/
+
+.available a {
+     width: 200px;
+     font-size: 17px;
+     padding: 20px 0px;
+     background-color: #ee580f;
+     color: #fff;
+     display: inline-block;
+     line-height: 20px;
+     border-radius: 30px;
+     text-align: center;
+     margin: 0 auto;
+     display: flex;
+     justify-content: center;
+}
+.available a:hover {
+     background: #15cfe5;
+     ;
+}

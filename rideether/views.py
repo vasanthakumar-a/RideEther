@@ -9,9 +9,9 @@ import web3
 
 ganache_url = "http://127.0.0.1:7545"
 web3 = Web3(Web3.HTTPProvider(ganache_url))
-web3.eth.default_account = web3.eth.accounts[3]
+web3.eth.default_account = web3.eth.accounts[0]
 abi = json.loads('[{"constant":false,"inputs":[{"name":"_first_name","type":"string"},{"name":"_last_name","type":"string"},{"name":"_email","type":"string"},{"name":"_username","type":"string"},{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"register","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"nbOfUsers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_driver_name","type":"string"},{"name":"_vehical_name","type":"string"},{"name":"_vehical_number","type":"string"},{"name":"_username","type":"string"},{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"driverRegister","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"login","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"driverLogin","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"nbOfDrivers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getUserAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]')
-address = web3.toChecksumAddress("0x0ee3a447d6961cfb372532fc65590840DeFD2f92")
+address = web3.toChecksumAddress("0x1663C18e04Ac84404b27A052431EE645Bd7a282f")
 
 contract = web3.eth.contract(address=address, abi=abi)
 
@@ -85,7 +85,7 @@ def process(request):
     if userDetails:
         return render(request, 'process.html',{'name':userDetails[0],'flag':1,'checkout':checkout})
     else:
-        return render(request, 'process.html',{'flag':0,'checkout':checkout})
+        return render(request, 'map.html',{'flag':0,'checkout':checkout})
 
 def map(request):
     print(userDetails)

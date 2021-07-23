@@ -9,7 +9,7 @@
     <script src="{% static 'js/script.js' %}"></script>
 </head>
 <body>
-    <div class="main_box">
+    <div class="main_box reg-box">
         <img src="{% static 'images/avatar.png' %}" class="logo">
         <h1>Register</h1>
         <form action="driverRegister" method="POST">
@@ -30,8 +30,8 @@
             <input type="password" name="password2" placeholder="Enter Confirm Password" />
             <br><br>
             <input type="submit" class="login_btn" value="Register">
+            <p><a href="driverLogin">Login Here</a></p>
         </form>
-        <p><a href="driverLogin">Login Here</a></p>
     </div>
     {% for message in messages %}
         <h3>{{message}}   </h3> 
