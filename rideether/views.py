@@ -1,4 +1,3 @@
-from typing import Container
 from django.shortcuts import redirect, render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
