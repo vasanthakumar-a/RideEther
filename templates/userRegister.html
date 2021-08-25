@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>User Register</title>
     <meta charset="UTF-8">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/login.css' %}" type="text/css">
     <script src="{% static 'js/script.js' %}"></script>
 </head>
+
 <body>
     <div class="main_box reg-box">
         <img src="{% static 'images/avatar.png' %}" class="logo">
@@ -34,7 +36,8 @@
         <p><a href="login">Login Here</a></p>
     </div>
     {% for message in messages %}
-        <h3>{{message}}   </h3> 
+    <h3>{{message}} </h3>
     {%endfor%}
 </body>
+
 </html>

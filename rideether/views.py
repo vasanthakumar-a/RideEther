@@ -9,8 +9,8 @@ import web3
 ganache_url = "http://127.0.0.1:7545"
 web3 = Web3(Web3.HTTPProvider(ganache_url))
 web3.eth.default_account = web3.eth.accounts[0]
-abi = json.loads('[{"constant":false,"inputs":[{"name":"_first_name","type":"string"},{"name":"_last_name","type":"string"},{"name":"_email","type":"string"},{"name":"_username","type":"string"},{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"register","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"nbOfUsers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_driver_name","type":"string"},{"name":"_vehical_name","type":"string"},{"name":"_vehical_number","type":"string"},{"name":"_username","type":"string"},{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"driverRegister","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"login","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"driverLogin","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"nbOfDrivers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getUserAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]')
-address = web3.toChecksumAddress("0x6ac2B4651A702CA0f72f0b756980009fdEc3F513")
+abi = json.loads('[{"constant":false,"inputs":[{"name":"_first_name","type":"string"},{"name":"_last_name","type":"string"},{"name":"_email","type":"string"},{"name":"_username","type":"string"},{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"register","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"nbOfUsers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_driver_name","type":"string"},{"name":"_vehical_name","type":"string"},{"name":"_vehical_number","type":"string"},{"name":"_username","type":"string"},{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"driverRegister","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"login","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getLocation","outputs":[{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"driverLogin","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"nbOfDrivers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getUserAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_fromLocation","type":"string"},{"name":"_toLocation","type":"string"}],"name":"setLocation","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]')
+address = web3.toChecksumAddress("0xd3979a8241a22fB3B0E996Eee8F8755cD7Cf4B0d")
 
 contract = web3.eth.contract(address=address, abi=abi)
 
@@ -18,6 +18,7 @@ userDetails = []
 driverDetails = []
 driver = []
 checkout = []
+locations = []
 available = False
 
 def start(request):
@@ -69,7 +70,7 @@ def login(request):
         userDetails = contract.functions.login(phone_number,password).call()
         print(userDetails)
         if (phone_number == userDetails[3] and password == userDetails[5]):
-            return redirect('process')
+            return redirect('map')
         else:
             messages.info(request,'Phone Number or Password Not Matching')
             return render(request, 'userLogin.html')
@@ -91,19 +92,27 @@ def driverLogout(request):
     return redirect('driverIndex')
 
 def process(request):
-    
-    checkout = ['Driver','44299','60','BMW','TN37AB1234','117.00','A Location','B Location']
+    global locations
 
-    print(userDetails)
+    checkout = ['Driver','44299','60','BMW','TN37AB1234','117.00','A Location','B Location']
+    locations = contract.functions.getLocation().call()
+    print(locations)
     if userDetails:
-        return render(request, 'process.html',{'name':userDetails[0],'flag':1,'driver':driver,'checkout':checkout})
+        return render(request, 'process.html',{'name':userDetails[0],'flag':1,'driver':driver,'location':locations})
     else:
         return render(request, 'map.html',{'flag':0,'checkout':checkout})
 
 def map(request):
-    print(userDetails)
     if userDetails:
-        return render(request, 'map.html',{'name':userDetails[0],'flag':1})
+        if request.method == 'POST':
+            fromLocation = request.POST['fromLoc']
+            toLocation = request.POST['toLoc']
+            map_hash = contract.functions.setLocation(fromLocation,toLocation).transact()
+            web3.eth.waitForTransactionReceipt(map_hash)
+            return redirect("process")
+        else:
+            return render(request, 'map.html',{'name':userDetails[0],'flag':1})
+        
     else:
         return render(request, 'map.html',{'flag':0})
 

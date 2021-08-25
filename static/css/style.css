@@ -1698,6 +1698,25 @@ input[type="radio"] .styled:checked+label::after {
      border: #fff solid 2px;
      color: #000;
 }
+
+
+
+.main-form input[type="submit"] {
+     background: #ee580f;
+     color: #fff;
+     max-width: 200px;
+     float: left;
+     font-size: 15px;
+     font-weight: 400;
+     border: solid #ee580f 1px;
+     padding: 10px 77px;
+     margin: 20px 0px 0px 0px;
+}
+.main-form input[type="submit"]:hover {
+     background: #757575;
+     border: solid #757575 1px;
+}
+
 .main-form a {
      background: #ee580f;
      color: #fff;
@@ -1706,12 +1725,14 @@ input[type="radio"] .styled:checked+label::after {
      font-weight: 400;
      border: solid #ee580f 1px;
      padding: 10px 77px;
-     margin: 57px 0px 0px 25px;
+     margin: 0px 0px 0px 25px;
 }
 .main-form a:hover {
      background: #757575;
      border: solid #757575 1px;
 }
+
+
 .about {
      margin-top: 30px;
      padding-top: 0px !important;

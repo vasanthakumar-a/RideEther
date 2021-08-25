@@ -1,224 +1,207 @@
 {%load static%}
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <!-- basic -->
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <!-- mobile metas -->
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-      <!-- site metas -->
-      <title>Ride Ether Map</title>
-      <meta name="keywords" content="">
-      <meta name="description" content="">
-      <meta name="author" content="">
-<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-      <link rel="stylesheet" href="{% static 'css/style.css' %}">
-      <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
-      <link rel="icon" href="{% static 'images/RideEtherLogo.png' %}" type="image/gif" />
-      <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
-      <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
-      <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
-   </head>
-   <!-- body -->
-   <body class="main-layout">
-      <!-- loader  -->
-      <div class="loader_bg">
-         <div class="loader"><img src="{% static 'images/loading.gif' %}" alt="#" /></div>
-      </div>
-      <!-- end loader -->
-      <!-- header -->
-      <header>
-         <!-- header inner -->
-         <div class="header">
-            <div class="container">
-               <div class="row">
-                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
-                     <div class="full">
-                        <div class="center-desk">
-                           <div class="logo"> <a href="/"><img src="{% static 'images/RideEtherLogo.png' %}" alt="#"></a> </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
-                     <div class="menu-area">
-                        <div class="limit-box">
-                           <nav class="main-menu">
-                              <ul class="menu-area-main">
-                                 <li class="active"> <a href="/">Home</a> </li>
 
-                                 {% if flag == 1 %}
-                                 <li><a>Hello, {{name}}</a></li>
-                                 <li><a href="logout">logout</a></li>
-                                 {% else %}
-                                 <li><a href="login">login</a></li>
-                                 <li><a href="register">Sign Up</a></li>
-                                 {% endif %}
-                              </ul>
-                           </nav>
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+   <title>Ride Ether Map</title>
+   <meta name="keywords" content="">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+   <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+   <link rel="icon" href="{% static 'images/RideEtherLogo.png' %}" type="image/gif" />
+   <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+   <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+   <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+</head>
+
+<body class="main-layout">
+   <div class="loader_bg">
+      <div class="loader"><img src="{% static 'images/loading.gif' %}" alt="#" /></div>
+   </div>
+   <header>
+      <div class="header">
+         <div class="container">
+            <div class="row">
+               <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                  <div class="full">
+                     <div class="center-desk">
+                        <div class="logo"> <a href="/"><img src="{% static 'images/RideEtherLogo.png' %}" alt="#"></a>
                         </div>
                      </div>
                   </div>
                </div>
-            </div>
-         </div>
-         <!-- end header inner -->
-      </header>
-      <!-- end header -->
-      <section >
-         <div class="banner-main">
-            <img src="{% static 'images/banner.jpg' %}" alt="#"/>
-            <div class="container">
-               <div class="text-bg">
-                  <div class="container">
-                     <form class="main-form">
-                        <h3>Find Your Tour</h3>
-                        <div class="row">
-                           <form action="">
-                              {% csrf_token %}
-                              <div class="col-md-9">
-                                 <div class="row">
+               <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                  <div class="menu-area">
+                     <div class="limit-box">
+                        <nav class="main-menu">
+                           <ul class="menu-area-main">
+                              <li class="active"> <a href="/">Home</a> </li>
 
-                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                       <label>From Location</label>
-                                       <input class="form-control" placeholder="00.0" type="text" name="from">
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                       <label>To Location</label>
-                                       <input class="form-control" placeholder="00.0" type="text" name="to">
-                                    </div>
-
-                                 </div>
-                              </div>
-                              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
-                                 {% if flag == 1 %}
-                                 <a href="process">Proceed</a>
-                                 {% else %}
-                                 <a href="login">Proceed</a>
-                                 {% endif %}
-                              </div>
-                           </form>
-                        </div>
-                     </form>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-      <!-- about -->
-      <div id="about" class="about">
-         <div class="bg">
-            <div class="container">
-               <div class="row">
-                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                     <div class="about-box">
-                        <p> <span><iframe
-                           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d250646.9682722278!2d76.82714657171041!3d11.011677490299467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba859af2f971cb5%3A0x2fc1c81e183ed282!2sCoimbatore%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1625373861281!5m2!1sen!2sin"
-                           width="868" height="470" style="border:0;" allowfullscreen="" loading="lazy"></iframe></span></p>
+                              {% if flag == 1 %}
+                              <li><a>Hello, {{name}}</a></li>
+                              <li><a href="logout">logout</a></li>
+                              {% else %}
+                              <li><a href="login">login</a></li>
+                              <li><a href="register">Sign Up</a></li>
+                              {% endif %}
+                           </ul>
+                        </nav>
                      </div>
                   </div>
                </div>
             </div>
-            {% if flag == 1 %}
-            <a href="process">Proceed</a>
-            {% else %}
-            <a href="login">Proceed</a>
-            {% endif %}
          </div>
       </div>
-   
-      <footer>
-         <div id="contact" class="footer">
-            <div class="container">
-               <div class="row pdn-top-30">
-                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                     <ul class="location_icon">
-                        <li> <a href="#"><img src="{% static 'icon/facebook.png' %}"></a></li>
-                        <li> <a href="#"><img src="{% static 'icon/Twitter.png' %}"></a></li>
-                        <li> <a href="#"><img src="{% static 'icon/linkedin.png' %}"></a></li>
-                        <li> <a href="#"><img src="{% static 'icon/insta.png' %}"></a></li>
+   </header>
+   <section>
+      <div class="banner-main">
+         <img src="{% static 'images/banner.jpg' %}" alt="#" />
+         <div class="container">
+            <div class="text-bg">
+               <div class="container">
+                  <form class="main-form" action="map" method="POST">
+                     <h3>Find Your Tour</h3>
+                     <div class="row">
+                        {% csrf_token %}
+                        <div class="col-md-9">
+                           <div class="row">
+                              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                                 <label>From Location</label>
+                                 <input class="form-control" placeholder="00.0" type="text" name="fromLoc" />
+                              </div>
+                              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                                 <label>To Location</label>
+                                 <input class="form-control" placeholder="00.0" type="text" name="toLoc" />
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                           {% if flag == 1 %}
+                           <input type="submit" value="Proceed">
+                           {% else %}
+                           <a href="login">Proceed</a>
+                           {% endif %}
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <div id="about" class="about">
+      <div class="bg">
+         <div class="container">
+            <div class="row">
+               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                  <div class="about-box">
+                     <p> <span><iframe
+                              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d250646.9682722278!2d76.82714657171041!3d11.011677490299467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba859af2f971cb5%3A0x2fc1c81e183ed282!2sCoimbatore%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1625373861281!5m2!1sen!2sin"
+                              width="868" height="470" style="border:0;" allowfullscreen=""
+                              loading="lazy"></iframe></span></p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         {% if flag == 1 %}
+         <a href="process">Proceed</a>
+         {% else %}
+         <a href="login">Proceed</a>
+         {% endif %}
+      </div>
+   </div>
+   <footer>
+      <div id="contact" class="footer">
+         <div class="container">
+            <div class="row pdn-top-30">
+               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                  <ul class="location_icon">
+                     <li> <a href="#"><img src="{% static 'icon/facebook.png' %}"></a></li>
+                     <li> <a href="#"><img src="{% static 'icon/Twitter.png' %}"></a></li>
+                     <li> <a href="#"><img src="{% static 'icon/linkedin.png' %}"></a></li>
+                     <li> <a href="#"><img src="{% static 'icon/insta.png' %}"></a></li>
+                  </ul>
+               </div>
+               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                  <div class="Follow">
+                     <h3>CONTACT US</h3>
+                     <span>Sri Eshwar College of Engineering <br>Kondampatti,<br>
+                        Vadasithur,<br> Coimbatore – 641 202<br>
+                        +91 7353618172</span>
+                  </div>
+               </div>
+               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                  <div class="Follow">
+                     <h3>ADDITIONAL LINKS</h3>
+                     <ul class="link">
+                        <li> <a href="#">About us</a></li>
+                        <li> <a href="#">Terms and conditions</a></li>
+                        <li> <a href="#"> Privacy policy</a></li>
+                        <li> <a href="#">News</a></li>
+                        <li> <a href="#"> Contact us</a></li>
                      </ul>
                   </div>
-                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                     <div class="Follow">
-                        <h3>CONTACT US</h3>
-                        <span>Sri Eshwar College of Engineering <br>Kondampatti,<br>
-                           Vadasithur,<br> Coimbatore – 641 202<br>
-                        +91 7353618172</span>
-                     </div>
-                  </div>
-                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                     <div class="Follow">
-                        <h3>ADDITIONAL LINKS</h3>
-                        <ul class="link">
-                           <li> <a href="#">About us</a></li>
-                           <li> <a href="#">Terms and conditions</a></li>
-                           <li> <a href="#"> Privacy policy</a></li>
-                           <li> <a href="#">News</a></li>
-                           <li> <a href="#"> Contact us</a></li>
-                        </ul>
-                     </div>
-                  </div>
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                     <div class="Follow">
-                        <h3> Contact</h3>
-                        <div class="row">
-                           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                              <input class="Newsletter" placeholder="Name" type="text">
-                           </div>
-                           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                              <input class="Newsletter" placeholder="Email" type="text">
-                           </div>
-                           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                              <textarea class="textarea" placeholder="comment" type="text">Comment</textarea>
-                           </div>
-                        </div>
-                        <button class="Subscribe">Submit</button>
-                     </div>
-                  </div>
                </div>
-               <div class="copyright">
-                  <div class="container">
+               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                  <div class="Follow">
+                     <h3> Contact</h3>
+                     <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                           <input class="Newsletter" placeholder="Name" type="text">
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                           <input class="Newsletter" placeholder="Email" type="text">
+                        </div>
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                           <textarea class="textarea" placeholder="comment" type="text">Comment</textarea>
+                        </div>
+                     </div>
+                     <button class="Subscribe">Submit</button>
                   </div>
                </div>
             </div>
+            <div class="copyright">
+               <div class="container">
+               </div>
+            </div>
          </div>
-      </footer>
-
-
-      <<script src="{% static 'js/jquery.min.js' %}"></script>
-      <script src="{% static 'js/popper.min.js' %}"></script>
-      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-      <script src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
-      <script src="{% static 'js/plugin.js' %}"></script>
-
-      <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
-      <script src="{% static 'js/custom.js' %}"></script>
-
-      <script src="{% static 'js/owl.carousel.js' %}"></script>
-
-      <script>
-         $(document).ready(function() {
-           var owl = $('.owl-carousel');
-           owl.owlCarousel({
-             margin: 10,
-             nav: true,
-             loop: true,
-             responsive: {
+      </div>
+   </footer>
+   <script src="{% static 'js/jquery.min.js' %}"></script>
+   <script src="{% static 'js/popper.min.js' %}"></script>
+   <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+   <script src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
+   <script src="{% static 'js/plugin.js' %}"></script>
+   <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+   <script src="{% static 'js/custom.js' %}"></script>
+   <script src="{% static 'js/owl.carousel.js' %}"></script>
+   <script>
+      $(document).ready(function () {
+         var owl = $('.owl-carousel');
+         owl.owlCarousel({
+            margin: 10,
+            nav: true,
+            loop: true,
+            responsive: {
                0: {
-                 items: 1
+                  items: 1
                },
                600: {
-                 items: 2
+                  items: 2
                },
                1000: {
-                 items: 3
+                  items: 3
                }
-             }
-           })
+            }
          })
-      </script>
-     
-   </body>
+      })
+   </script>
+</body>
+
 </html>
