@@ -4,7 +4,6 @@ from django.contrib import messages
 from web3 import Web3
 import json
 import web3
-# Create your views here.
 
 ganache_url = "http://127.0.0.1:7545"
 web3 = Web3(Web3.HTTPProvider(ganache_url))
@@ -52,8 +51,6 @@ def register(request):
             else:
                 tx_hash = contract.functions.register(first_name,last_name,email,username,phone_number,password1).transact()
                 web3.eth.waitForTransactionReceipt(tx_hash)
-                # user = User.objects.create_user(username=username, password=password1, email=email, first_name=first_name, last_name=last_name)
-                # user.save()
                 print('User created')
                 return redirect('login')
         else:
@@ -147,8 +144,6 @@ def driverRegister(request):
         if password1==password2:
                 tx_hash = contract.functions.driverRegister(driver_name,vehical_name,vehical_number,username,phone_number,password1).transact()
                 web3.eth.waitForTransactionReceipt(tx_hash)
-                # user = User.objects.create_user(username=username, password=password1, email=email, first_name=first_name, last_name=last_name)
-                # user.save()
                 print('User created')
                 return redirect('driverLogin')
         else:

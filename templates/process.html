@@ -44,7 +44,7 @@
                               <li class="active"> <a href="/">Home</a> </li>
 
                               {% if flag == 1 %}
-                              <li><a>Hello, {{name}}</a></li>
+                              <li><a href="#" style="color: #000;">Hello, {{name}}</a></li>
                               <li><a href="logout">logout</a></li>
                               {% else %}
                               <li><a href="login">login</a></li>
@@ -120,29 +120,33 @@
             <div class="row pdn-top-30">
                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                   <ul class="location_icon">
-                     <li> <a href="#"><img src="{% static 'icon/facebook.png' %}"></a></li>
-                     <li> <a href="#"><img src="{% static 'icon/Twitter.png' %}"></a></li>
-                     <li> <a href="#"><img src="{% static 'icon/linkedin.png' %}"></a></li>
-                     <li> <a href="#"><img src="{% static 'icon/insta.png' %}"></a></li>
+                     <li> <a href="#contacts"><img src="{% static 'icon/facebook.png' %}"
+                              type="image/x-image"></a></li>
+                     <li> <a href="#contacts"><img src="{% static 'icon/Twitter.png' %}"
+                              type="image/x-image"></a></li>
+                     <li> <a href="#contacts"><img src="{% static 'icon/linkedin.png' %}"
+                              type="image/x-image"></a></li>
+                     <li> <a href="#contacts"><img src="{% static 'icon/insta.png' %}" type="image/x-image"></a>
+                     </li>
                   </ul>
                </div>
                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                   <div class="Follow">
                      <h3>CONTACT US</h3>
-                     <span>123 Second Street Fifth <br>Avenue,<br>
-                        Manhattan, New York<br>
-                        +987 654 3210</span>
+                     <span>Sri Eshwar College of Engineering <br>Kondampatti,<br>
+                        Vadasithur,<br> Coimbatore – 641 202<br>
+                        +91 7353618172</span>
                   </div>
                </div>
                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                   <div class="Follow">
                      <h3>ADDITIONAL LINKS</h3>
                      <ul class="link">
-                        <li> <a href="#">About us</a></li>
-                        <li> <a href="#">Terms and conditions</a></li>
-                        <li> <a href="#"> Privacy policy</a></li>
-                        <li> <a href="#">News</a></li>
-                        <li> <a href="#"> Contact us</a></li>
+                        <li> <a href="#contacts">About us</a></li>
+                        <li> <a href="#contacts">Terms and conditions</a></li>
+                        <li> <a href="#contacts"> Privacy policy</a></li>
+                        <li> <a href="#contacts">News</a></li>
+                        <li> <a href="#contacts"> Contact us</a></li>
                      </ul>
                   </div>
                </div>
@@ -164,8 +168,11 @@
                   </div>
                </div>
             </div>
+            <div class="copyright">
+               <div class="container">
+               </div>
+            </div>
          </div>
-         <div><br></div>
       </div>
    </footer>
    <script src="{% static 'js/jquery.min.js' %}"></script>

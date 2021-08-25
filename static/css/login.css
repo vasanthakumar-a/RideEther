@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     background-image: url(../images/pic1.jpg);
-    background-size: fill;
+    background-size: cover;
     background-position: center;
     font-family: sans-serif;
 }
