@@ -20,6 +20,9 @@ checkout = []
 locations = []
 available = False
 
+def home(request):
+    return render(request, 'index.html')
+
 def start(request):
     global available
     available = True
