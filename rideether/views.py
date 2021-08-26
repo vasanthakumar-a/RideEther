@@ -1,5 +1,6 @@
+from rideether.models import driverDB
 from django.shortcuts import redirect, render, redirect
-from django.contrib.auth.models import User, auth
+from django.contrib.auth.models import User,auth
 from django.contrib import messages
 from web3 import Web3
 import json
@@ -8,8 +9,8 @@ import web3
 ganache_url = "http://127.0.0.1:7545"
 web3 = Web3(Web3.HTTPProvider(ganache_url))
 web3.eth.default_account = web3.eth.accounts[0]
-abi = json.loads('[{"constant":false,"inputs":[{"name":"_first_name","type":"string"},{"name":"_last_name","type":"string"},{"name":"_email","type":"string"},{"name":"_username","type":"string"},{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"register","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"nbOfUsers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_driver_name","type":"string"},{"name":"_vehical_name","type":"string"},{"name":"_vehical_number","type":"string"},{"name":"_username","type":"string"},{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"driverRegister","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"login","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getLocation","outputs":[{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"driverLogin","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"nbOfDrivers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getUserAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_fromLocation","type":"string"},{"name":"_toLocation","type":"string"}],"name":"setLocation","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]')
-address = web3.toChecksumAddress("0xd3979a8241a22fB3B0E996Eee8F8755cD7Cf4B0d")
+abi = json.loads('[{"constant":false,"inputs":[{"name":"_first_name","type":"string"},{"name":"_last_name","type":"string"},{"name":"_email","type":"string"},{"name":"_username","type":"string"},{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"register","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"nbOfUsers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_driver_name","type":"string"},{"name":"_vehical_name","type":"string"},{"name":"_vehical_number","type":"string"},{"name":"_username","type":"string"},{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"driverRegister","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"login","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"driverInfo","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getLocation","outputs":[{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"driverLogin","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"nbOfDrivers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getUserAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_fromLocation","type":"string"},{"name":"_toLocation","type":"string"}],"name":"setLocation","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]')
+address = web3.toChecksumAddress("0xdB7aA7d3C48c2087ae550045767c6083B125e967")
 
 contract = web3.eth.contract(address=address, abi=abi)
 
@@ -25,12 +26,23 @@ def home(request):
 
 def start(request):
     global available
+    global driver
+    driver = contract.functions.driverInfo().call()
+    print(driver)
     available = True
+    drvDB = driverDB(username=driver[0], driver_name=driver[1] , vehical_name= driver[2], vehical_number=driver[3] , phone_number=driver[4] , driver_address=driver[5] )
+    drvDB.save();
+    print("DriverDB Saved")
     return redirect('driverIndex')
 
 def stop(request):
     global available
+    global driver
     available = False
+    
+    driverDB.objects.filter(driver_address=driver[5]).delete()
+    driver = []
+
     return redirect('driverIndex')
 
 def register(request):
@@ -45,13 +57,13 @@ def register(request):
         password2 = request.POST['password2']
 
         if password1==password2:
-            if User.objects.filter(username=username).exists():
-                messages.info(request,'Username Taken')
-                return redirect('register')
-            elif User.objects.filter(email=email).exists():
-                messages.info(request,'Email Taken')
-                return redirect('register')
-            else:
+            # if User.objects.filter(username=username).exists():
+            #     messages.info(request,'Username Taken')
+            #     return redirect('register')
+            # elif User.objects.filter(email=email).exists():
+            #     messages.info(request,'Email Taken')
+            #     return redirect('register')
+            # else:
                 tx_hash = contract.functions.register(first_name,last_name,email,username,phone_number,password1).transact()
                 web3.eth.waitForTransactionReceipt(tx_hash)
                 print('User created')
@@ -96,7 +108,8 @@ def process(request):
 
     checkout = ['Driver','44299','60','BMW','TN37AB1234','117.00','A Location','B Location']
     locations = contract.functions.getLocation().call()
-    print(locations)
+    # process_driver = [i for i in driverDB.objects.fliter(pk=11)]
+    # print(process_driver)
     if userDetails:
         return render(request, 'process.html',{'name':userDetails[0],'flag':1,'driver':driver,'location':locations})
     else:
@@ -156,11 +169,7 @@ def driverRegister(request):
         return render(request, "driverRegister.html")
 
 def driverIndex(request):
-    if available:
-        global driver
-        driver = driverDetails
-    else:
-        driver = []
+
     if driverDetails:
         return render(request, 'driverIndex.html',{'name':driverDetails[0],'flag':1,'available':available})
     else:

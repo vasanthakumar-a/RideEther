@@ -38,7 +38,6 @@
                      <div class="limit-box">
                         <nav class="main-menu">
                            <ul class="menu-area-main">
-
                               {% if flag == 1 %}
                               {% if available is True %}
                               <li class="avail"> <a href="driverIndex">Available</a></li>
@@ -48,9 +47,7 @@
                               {% else %}
                               <li class="notLogin"> <a href="driverLogin">Not Login</a> </li>
                               {% endif %}
-
                               <li class="active"> <a href="driverIndex">Home</a> </li>
-
                               {% if flag == 1 %}
                               <li><a href="#" style="color: #000;">Hello, {{name}}</a></li>
                               <li><a href="driverLogout">logout</a></li>
