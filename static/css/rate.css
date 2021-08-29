@@ -1,0 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: arial;
+}
+
+.heading {
+    margin-top: 20px;
+    padding: 20px;
+}
+.skip a {
+    text-decoration: none;
+    color: #4caf50;
+    margin: 0px;
+    padding: 0px;
+    top: 20px;
+}
+
+.loader_bg {
+    position: fixed;
+    z-index: 9999999;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+}
+
+.star-rating .sub {
+    display: none;
+}
+.star-rating .thanks-msg {
+    display: none;
+    font-size: 20px;
+    margin: 40px auto;
+    color: #4caf50;
+    background-color: rgba(76, 175, 80, 0.1411764705882353);
+    padding: 8px 20px;
+    border-left: 3px solid #4caf50;
+    border-radius: 20px;
+}
+.star-rating input[type="radio"] {
+    display: none;
+}
+.star-rating {
+    margin: 50px auto;
+    display: table;
+    width: 350px;
+}
+.star-rating label {
+    padding: 10px;
+    float: right;
+    font-size: 44px;
+    color: #eee;
+}
+.star-rating input:not(:checked) ~ label:hover,
+.star-rating input:not(:checked) ~ label:hover ~ label {
+    color: #ffc107;
+}
+.star-rating input:checked ~ label {
+    color: #ffcb2d;
+}
+.star-rating .sub .rating-reaction:before {
+    width: 100%;
+    float: left;
+    color: #fac527;
+}
+.star-rating #rating-1:checked ~ .sub .rating-reaction:before {
+    content: "It is Ok";
+}
+.star-rating #rating-2:checked ~ .sub .rating-reaction:before {
+    content: "It is Good";
+}
+.star-rating #rating-3:checked ~ .sub .rating-reaction:before {
+    content: "It is nice";
+}
+.star-rating #rating-4:checked ~ .sub .rating-reaction:before {
+    content: "I like it";
+}
+.star-rating #rating-5:checked ~ .sub .rating-reaction:before {
+    content: "I love it";
+}
+.star-rating input:checked ~ .sub {
+    border-top: 1px solid #ddd;
+    width: 100%;
+    padding-top: 15px;
+    margin-top: 15px;
+    display: inline-block;
+}
+.star-rating .sub .rating-reaction {
+    font-size: 24px;
+    float: left;
+    text-transform: capitalize;
+}
+.star-rating .sub .submit-rating {
+    border: none;
+    outline: none;
+    background: #795548;
+    color: #ffc107;
+    font-size: 18px;
+    border-radius: 4px;
+    padding: 5px 15px;
+    cursor: pointer;
+    float: right;
+}
+.sub .submit-rating:hover {
+    background-color: #333;
+}

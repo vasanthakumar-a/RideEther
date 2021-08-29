@@ -1,3 +1,4 @@
+from web3.module import retrieve_async_method_call_fn
 from rideether.models import driverDB
 from django.shortcuts import redirect, render, redirect
 from django.contrib.auth.models import User,auth
@@ -8,9 +9,9 @@ import web3
 
 ganache_url = "http://127.0.0.1:7545"
 web3 = Web3(Web3.HTTPProvider(ganache_url))
-web3.eth.default_account = web3.eth.accounts[1]
-abi = json.loads('[{"constant":false,"inputs":[{"name":"_first_name","type":"string"},{"name":"_last_name","type":"string"},{"name":"_email","type":"string"},{"name":"_username","type":"string"},{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"register","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"nbOfUsers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_driver_name","type":"string"},{"name":"_vehical_name","type":"string"},{"name":"_vehical_number","type":"string"},{"name":"_username","type":"string"},{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"driverRegister","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"login","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"driverInfo","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getLocation","outputs":[{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"driverLogin","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"nbOfDrivers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getUserAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_fromLocation","type":"string"},{"name":"_toLocation","type":"string"}],"name":"setLocation","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]')
-address = web3.toChecksumAddress("0x11269768d50673270240E7DE9e93a30822E78834")
+web3.eth.default_account = web3.eth.accounts[0]
+abi = json.loads('[{"constant":false,"inputs":[{"name":"_first_name","type":"string"},{"name":"_last_name","type":"string"},{"name":"_email","type":"string"},{"name":"_username","type":"string"},{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"register","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"nbOfUsers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"rate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_driver_name","type":"string"},{"name":"_vehical_name","type":"string"},{"name":"_vehical_number","type":"string"},{"name":"_username","type":"string"},{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"driverRegister","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_rate","type":"uint256"}],"name":"setRate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"login","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getRate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"driverInfo","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getLocation","outputs":[{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"driverLogin","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"nbOfDrivers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getUserAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_fromLocation","type":"string"},{"name":"_toLocation","type":"string"}],"name":"setLocation","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]')
+address = web3.toChecksumAddress("0x2962522F4ee58b7b7f29B6589C1F4E9cD493B8Aa")
 
 contract = web3.eth.contract(address=address, abi=abi)
 
@@ -20,6 +21,7 @@ driver = []
 checkout = []
 locations = []
 available = False
+trans = False
 tr = ""
 
 def home(request):
@@ -28,15 +30,14 @@ def home(request):
 def start(request):
     global available
     global driver
-    global tr
     driver = contract.functions.driverInfo().call()
     print(driver)
-    tr = driver[5]
-    print(tr)
+
     available = True
     drvDB = driverDB(username=driver[0], driver_name=driver[1] , vehical_name= driver[2], vehical_number=driver[3] , phone_number=driver[4] , driver_address=driver[5] )
     drvDB.save();
     print("DriverDB Saved")
+
     return redirect('driverIndex')
 
 def stop(request):
@@ -109,18 +110,24 @@ def driverLogout(request):
 
 def process(request):
     global locations
+    global trans
+    global tr
 
     checkout = ['Driver','44299','60','BMW','TN37AB1234','117.00','A Location','B Location']
     locations = contract.functions.getLocation().call()
+    ratings = contract.functions.getRate().call()
     drv = list(driverDB.objects.values_list())
-    print(drv)
-    print("~~~~~~~~~~",type(drv))
+    print("~~~~~~~~~~",ratings)
+    tr = drv[0][6]
+
     if request.method == 'POST':
+        trans = True
         return redirect('transact')
-    if userDetails:
-        return render(request, 'process.html',{'name':userDetails[0],'flag':1,'driver':drv[0],'location':locations})
     else:
-        return render(request, 'map.html',{'flag':0,'checkout':checkout})
+        if userDetails:
+            return render(request, 'process.html',{'name':userDetails[0],'flag':1,'driver':drv[0],'location':locations,'rate':ratings})
+        else:
+            return render(request, 'map.html',{'flag':0,'checkout':checkout})
 
 def map(request):
     if userDetails:
@@ -184,9 +191,36 @@ def driverIndex(request):
 
 def transact(request):
     global tr
+    global trans
+
     print(web3.eth.default_account, tr)
     if request.method == 'POST':
-        transact_hash = web3.eth.send_transaction({'from':web3.eth.default_account, 'to':tr, 'value':1000000000})
+        transact_hash = web3.eth.send_transaction({'from':web3.eth.default_account, 'to':tr, 'value':1000000000000000000})
         web3.eth.waitForTransactionReceipt(transact_hash)
         print('Transact Success')
-    return render(request,'transaction.html')
+        return redirect('rate')
+    else:
+        amount = 1
+        t_from = web3.eth.default_account
+        if trans:
+            return render(request,'transaction.html',{'amount':amount,'from':t_from[-5:],'to':tr[-5:]})
+        else:
+            return redirect('login')
+
+def rate(request):
+    global rating
+    if request.method == 'POST':
+        rating = request.POST['rating']
+        print(rating)
+        setRate(int(rating))
+        return redirect('/')
+    else:
+        return render(request,'rate.html')
+
+def setRate(rating):
+    rates = contract.functions.getRate().call()
+    rates = (rates+rating)//2
+    print(rates)
+
+    rate_hash = contract.functions.setRate(rates).transact()
+    web3.eth.waitForTransactionReceipt(rate_hash)

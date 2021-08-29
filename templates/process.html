@@ -65,42 +65,43 @@
          <div class="container">
             <div class="text-bg">
                <div class="container">
-                  <form class="main-form" action="process">
+                  <form class="main-form" action="process" method="POST">
+                     {% csrf_token %}
                      <h3>Checkout</h3>
                      <div class="row">
                         <div class="col-md-9">
                            <div class="row">
                               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                  <label>Driver Name</label>
-                                 <input class="form-control" placeholder="{{driver.1}}" type="text" name="">
+                                 <input class="form-control" placeholder="{{driver.1}}" type="text" name="a">
                               </div>
                               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                  <label>Phone Number</label>
-                                 <input class="form-control" placeholder="{{driver.4}}" type="text" name="">
+                                 <input class="form-control" placeholder="{{driver.4}}" type="text" name="b">
                               </div>
                               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                 <label>Duration</label>
-                                 <input class="form-control" placeholder="60 Min" type="text" name="00.0">
+                                 <label>Rating</label>
+                                 <input class="form-control" placeholder="{{rate}}" type="text" name="c">
                               </div>
                               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                  <label>Vehical Name</label>
-                                 <input class="form-control" placeholder="{{driver.2}}" type="text" name="Any">
+                                 <input class="form-control" placeholder="{{driver.2}}" type="text" name="d">
                               </div>
                               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                  <label>Vehical Nuber</label>
-                                 <input class="form-control" placeholder="{{driver.3}}" type="text" name="Any">
+                                 <input class="form-control" placeholder="{{driver.3}}" type="text" name="e">
                               </div>
                               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                  <label>Price</label>
-                                 <input class="form-control" placeholder="1000Rs" type="text" name="00.0">
+                                 <input class="form-control" placeholder="1000Rs" type="text" name="f">
                               </div>
                               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                  <label>From Location</label>
-                                 <input class="form-control" placeholder="{{location.0}}" type="text" name="00.0">
+                                 <input class="form-control" placeholder="{{location.0}}" type="text" name="g">
                               </div>
                               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                  <label>To Location</label>
-                                 <input class="form-control" placeholder="{{location.1}}" type="text" name="00.0">
+                                 <input class="form-control" placeholder="{{location.1}}" type="text" name="h">
                               </div>
                            </div>
                         </div>

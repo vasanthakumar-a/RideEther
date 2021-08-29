@@ -17,9 +17,9 @@
         <form action="transact" method="POST">
             {% csrf_token %}
             <p>From Address : </p>
-            <label>0x00000000000000143424</label><br><br>
+            <label>0x.........{{from}}</label><br><br>
             <p>Amount : </p>
-            <label>1 Ether</label><br><br><br>
+            <label>{{amount}} Ether</label><br><br><br>
             <input type="submit" value="Send" />
         </form>
     </div>
@@ -30,9 +30,9 @@
         <form action="" method="POST">
             {% csrf_token %}
             <p>To Address : </p>
-            <label>0x00000000000000143425</label><br><br>
+            <label>0x.........{{to}}</label><br><br>
             <p>Amount : </p>
-            <label>1 Ether</label><br><br><br>
+            <label>{{amount}} Ether</label><br><br><br>
         </form>
     </div>
 
