@@ -14,4 +14,6 @@ urlpatterns=[
     path('driverIndex', views.driverIndex, name='driverIndex'),
     path('start', views.start, name='start'),
     path('stop', views.stop, name='stop'),
+    path('transact', views.transact, name='transact'),
+    path('rate', views.rate, name='rate'),
 ]

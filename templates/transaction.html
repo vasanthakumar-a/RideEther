@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Transaction</title>
+    <meta charset="UTF-8">
+    <link rel="icon" href="{% static 'images/loginLogo.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/transaction.css' %}" type="text/css">
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+
+<body>
+    <div class="main_box main_box1">
+        
+        <h1>From Account</h1><br>
+        <form action="transact" method="POST">
+            {% csrf_token %}
+            <p>From Address : </p>
+            <label>0x.........{{from}}</label><br><br>
+            <p>Amount : </p>
+            <label>{{amount}} Ether</label><br><br><br>
+            <input type="submit" value="Send" />
+        </form>
+    </div>
+
+    <div class="main_box main_box2">
+        
+        <h1>To Account</h1><br>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <p>To Address : </p>
+            <label>0x.........{{to}}</label><br><br>
+            <p>Amount : </p>
+            <label>{{amount}} Ether</label><br><br><br>
+        </form>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Feedback</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" />
+        <link rel="stylesheet" href="{% static 'css/rate.css' %}" />
+    </head>
+    <body>
+        <div class="heading">
+            <center><h1>Feedback</h1></center>
+        </div>
+        <div class="star-rating">
+            <div class="thanks-msg">Thanks for your feedback !!!</div>
+            <div class="star-input">
+                <form action="rate" method="POST">
+                    {% csrf_token %}
+                    <input type="radio" name="rating" id="rating-5" value="5">
+                    <label for="rating-5" class="fas fa-star"></label>
+                    <input type="radio" name="rating" id="rating-4" value="4">
+                    <label for="rating-4" class="fas fa-star"></label>
+                    <input type="radio" name="rating" id="rating-3" value="3">
+                    <label for="rating-3" class="fas fa-star"></label>
+                    <input type="radio" name="rating" id="rating-2" value="2">
+                    <label for="rating-2" class="fas fa-star"></label>
+                    <input type="radio" name="rating" id="rating-1" value="1">
+                    <label for="rating-1" class="fas fa-star"></label>
+                
+                    <div class="sub">
+                        <span class="rating-reaction"></span>
+                        <input type="submit" class="submit-rating" value="Submit" />
+                    </div>
+                </form>
+            </div>
+            <div class="skip">
+            <center><a href="map">skip</a></center>
+            </div>
+        </div>
+    </body>
+    <!-- <script>
+        const btn = document.querySelector(".submit-rating");
+        const thanksmsg = document.querySelector(".thanks-msg");
+        const starRating = document.querySelector(".star-input");
+        // Success msg show/hide
+        btn.onclick = () => {
+            starRating.style.display = "none";
+            thanksmsg.style.display = "table";
+            return false;
+        };
+    </script> -->
+</html>
