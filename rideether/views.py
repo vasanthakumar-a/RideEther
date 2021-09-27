@@ -140,6 +140,19 @@ def accept(request):
 def waiting(request):
     return render(request, 'waiting.html')
 
+def acceptRide(request):
+    global notice
+    
+    wait = list(waitingDB.objects.values_list())
+    if request.method == 'POST':
+        f_addr = contract.functions.getUserAddress().call()
+        accp = acceptDB(driver_address=tr ,user_address=f_addr ,accept=1)
+        accp.save()
+        notice = 0
+        return redirect('driverIndex')
+    else:
+        return render(request, 'acceptRide.html',{'main_info':wait[0]})
+
 def map(request):
     if userDetails:
         if request.method == 'POST':
@@ -194,12 +207,14 @@ def driverRegister(request):
         return render(request, "driverRegister.html")
 
 def driverIndex(request):
+    global notice
 
     wait = list(waitingDB.objects.values_list())
     print(wait)
     if driverDetails:
         if wait:
-            return render(request, 'driverIndex.html',{'name':driverDetails[0],'flag':1,'available':available,'wait':wait})
+            notice = 1
+            return render(request, 'driverIndex.html',{'name':driverDetails[0],'flag':1,'notice':notice,'available':available,'wait':wait})
         else:
             return render(request, 'driverIndex.html',{'name':driverDetails[0],'flag':1,'available':available})
     else:

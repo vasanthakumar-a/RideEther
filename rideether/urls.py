@@ -18,4 +18,5 @@ urlpatterns=[
     path('rate', views.rate, name='rate'),
     path('waiting', views.waiting, name='waiting'),
     path('accept', views.accept, name='accept'),
+    path('acceptRide', views.acceptRide, name='acceptRide'),
 ]

@@ -38,8 +38,10 @@
                      <div class="limit-box">
                         <nav class="main-menu">
                            <ul class="menu-area-main">
-                           <li class="active"><a class="fa fa-bell-o"></a></li>
                               {% if flag == 1 %}
+                              {% if notice == 1 %}
+                              <li class="active"><a href="acceptRide" class="fa fa-bell-o"></a></li>
+                              {% endif %}
                               {% if available is True %}
                               <li class="avail"> <a href="driverIndex">Available</a></li>
                               {% else %}
