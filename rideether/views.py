@@ -1,5 +1,5 @@
 from web3.module import retrieve_async_method_call_fn
-from rideether.models import driverDB
+from rideether.models import acceptDB, driverDB, waitingDB
 from django.shortcuts import redirect, render, redirect
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
@@ -11,7 +11,7 @@ ganache_url = "http://127.0.0.1:7545"
 web3 = Web3(Web3.HTTPProvider(ganache_url))
 web3.eth.default_account = web3.eth.accounts[0]
 abi = json.loads('[{"constant":false,"inputs":[{"name":"_first_name","type":"string"},{"name":"_last_name","type":"string"},{"name":"_email","type":"string"},{"name":"_username","type":"string"},{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"register","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"nbOfUsers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"rate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_driver_name","type":"string"},{"name":"_vehical_name","type":"string"},{"name":"_vehical_number","type":"string"},{"name":"_username","type":"string"},{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"driverRegister","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_rate","type":"uint256"}],"name":"setRate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"login","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getRate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"driverInfo","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getLocation","outputs":[{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_phone_number","type":"string"},{"name":"_password","type":"string"}],"name":"driverLogin","outputs":[{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"nbOfDrivers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getUserAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_fromLoc","type":"string"},{"name":"_toLoc","type":"string"}],"name":"setLocation","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]')
-address = web3.toChecksumAddress("0xfc54D797bE46E05DcFc1a7298C4fd4DA1Bb1d68F")
+address = web3.toChecksumAddress("0x64B4556Aa9E57f7dB19b90022bc59742EAe09c51")
 
 contract = web3.eth.contract(address=address, abi=abi)
 
@@ -119,8 +119,12 @@ def process(request):
     drv = list(driverDB.objects.values_list())
     if userDetails:
         if request.method == 'POST':
-            trans = True
-            return redirect('transact')
+            if drv:
+                wait = waitingDB(first_name=userDetails[1], last_name=userDetails[2], email=userDetails[4], username=userDetails[0], phone_number=userDetails[3],drv_username=drv[0][4])
+                wait.save()
+                return redirect('accept')
+            else:
+                return redirect('process')
         else:
             if drv:
                 tr = drv[0][6]
@@ -129,6 +133,12 @@ def process(request):
                 return render(request, 'process.html',{'name':userDetails[0],'flag':1,'location':locations})
     else:
         return render(request, 'map.html',{'flag':0,'checkout':checkout})
+
+def accept(request):
+    return render(request, 'accept.html')
+
+def waiting(request):
+    return render(request, 'waiting.html')
 
 def map(request):
     if userDetails:
@@ -185,8 +195,13 @@ def driverRegister(request):
 
 def driverIndex(request):
 
+    wait = list(waitingDB.objects.values_list())
+    print(wait)
     if driverDetails:
-        return render(request, 'driverIndex.html',{'name':driverDetails[0],'flag':1,'available':available})
+        if wait:
+            return render(request, 'driverIndex.html',{'name':driverDetails[0],'flag':1,'available':available,'wait':wait})
+        else:
+            return render(request, 'driverIndex.html',{'name':driverDetails[0],'flag':1,'available':available})
     else:
         return render(request, 'driverIndex.html',{'flag':0,'available':available})
 

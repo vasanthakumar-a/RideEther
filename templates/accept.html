@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Waiting</title>
+    <meta charset="UTF-8">
+    <link rel="icon" href="{% static 'images/loginLogo.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url("{% static 'images/pic.jpg' %}");
+            background-size: 200%;
+            background-position: center;
+            font-family: sans-serif;
+        }
+        h1 {
+            margin: 50px;
+            padding: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="happyRide">
+        <center><h1>Please, Wait for the Driver to ACCEPT your Ride !! </h1></center>
+    </div>
+    
+</body>
+</html>

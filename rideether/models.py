@@ -15,6 +15,7 @@ class waitingDB(models.Model):
     email = models.CharField(max_length=50)
     username = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=50)
+    drv_username = models.CharField(max_length=50)
 
 class acceptDB(models.Model):
     driver_address = models.CharField(max_length=50)
