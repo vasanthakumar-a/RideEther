@@ -1809,11 +1809,6 @@ input[type="radio"] .styled:checked+label::after {
      display: inline-block;
      padding-right: 360px;
 }
-.palne-img-area {
-     position: absolute;
-     top: -30px;
-     right: -78px;
-}
 .about a {
      width: 200px;
      font-size: 17px;
