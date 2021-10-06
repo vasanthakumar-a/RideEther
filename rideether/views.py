@@ -135,19 +135,29 @@ def process(request):
         return render(request, 'map.html',{'flag':0,'checkout':checkout})
 
 def accept(request):
-    return render(request, 'accept.html')
+    global trans
+
+    accp = list(acceptDB.objects.values_list())
+    if accp:
+        trans = True
+        acceptDB.objects.filter(user_address=web3.eth.default_account).delete()
+        return redirect('transact')
+    else:
+        return render(request, 'accept.html')
 
 def waiting(request):
     return render(request, 'waiting.html')
 
 def acceptRide(request):
     global notice
-    
+
     wait = list(waitingDB.objects.values_list())
     if request.method == 'POST':
+        stop(request)
         f_addr = contract.functions.getUserAddress().call()
-        accp = acceptDB(driver_address=tr ,user_address=f_addr ,accept=1)
+        accp = acceptDB(driver_address=web3.eth.default_account ,user_address=f_addr ,accept=1)
         accp.save()
+        waitingDB.objects.filter(drv_username=wait[0][6]).delete()
         notice = 0
         return redirect('driverIndex')
     else:
